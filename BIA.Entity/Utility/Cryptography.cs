@@ -296,21 +296,23 @@ namespace BIA.Entity.Utility
                         rijManaged.IV = GenerateIV();
                         rijManaged.Key = GenerateKey();
                         rijManaged.Padding = PaddingMode.Zeros;
-                        ICryptoTransform icpoTransform = rijManaged.CreateEncryptor(rijManaged.Key, rijManaged.IV);
-                        using (MemoryStream memStream = new MemoryStream())
+                        using (ICryptoTransform icpoTransform = rijManaged.CreateEncryptor(rijManaged.Key, rijManaged.IV))
                         {
-                            using (CryptoStream cpoStream = new CryptoStream(memStream, icpoTransform, CryptoStreamMode.Write))
+                            using (MemoryStream memStream = new MemoryStream())
                             {
-                                cpoStream.Write(bytePlainText, 0, bytePlainText.Length);
-                                cpoStream.FlushFinalBlock();
+                                using (CryptoStream cpoStream = new CryptoStream(memStream, icpoTransform, CryptoStreamMode.Write))
+                                {
+                                    cpoStream.Write(bytePlainText, 0, bytePlainText.Length);
+                                    cpoStream.FlushFinalBlock();
+                                }
+                                strOutput = Encoding.Default.GetString(memStream.ToArray());
                             }
-                            strOutput = Encoding.Default.GetString(memStream.ToArray());
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    throw ex;
+                    throw;
                 }
             }
             return strOutput;
@@ -333,20 +335,22 @@ namespace BIA.Entity.Utility
                         rijManaged.IV = GenerateIV();
                         rijManaged.Key = GenerateKey();
                         rijManaged.Padding = PaddingMode.Zeros;
-                        ICryptoTransform icpoTransform = rijManaged.CreateDecryptor(rijManaged.Key, rijManaged.IV);
-                        using (MemoryStream memStream = new MemoryStream(byteCipherText))
+                        using (ICryptoTransform icpoTransform = rijManaged.CreateDecryptor(rijManaged.Key, rijManaged.IV))
                         {
-                            using (CryptoStream cpoStream = new CryptoStream(memStream, icpoTransform, CryptoStreamMode.Read))
+                            using (MemoryStream memStream = new MemoryStream(byteCipherText))
                             {
-                                cpoStream.Read(byteBuffer, 0, byteBuffer.Length);
+                                using (CryptoStream cpoStream = new CryptoStream(memStream, icpoTransform, CryptoStreamMode.Read))
+                                {
+                                    cpoStream.Read(byteBuffer, 0, byteBuffer.Length);
+                                }
+                                strOutput = Encoding.Default.GetString(byteBuffer);
                             }
-                            strOutput = Encoding.Default.GetString(byteBuffer);
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    throw ex;
+                    throw;
                 }
             }
             return strOutput;

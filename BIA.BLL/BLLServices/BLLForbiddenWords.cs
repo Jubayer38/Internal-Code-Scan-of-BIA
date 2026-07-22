@@ -15,9 +15,9 @@ namespace BIA.BLL.BLLServices
 
         public async Task<List<ForbiddenWords>> GetForbiddenWordsAsync()
         {
-            if (_isLoaded)
+            lock (_lock)
             {
-                lock (_lock)
+                if (_isLoaded)
                 {
                     return new List<ForbiddenWords>(_forbiddenWords);
                 }

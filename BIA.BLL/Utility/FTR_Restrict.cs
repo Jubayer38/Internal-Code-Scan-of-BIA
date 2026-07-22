@@ -1,4 +1,4 @@
-﻿using BIA.BLL.BLLServices;
+using BIA.BLL.BLLServices;
 using BIA.Entity.Collections;
 using BIA.Entity.DB_Model;
 using BIA.Entity.ENUM;
@@ -75,7 +75,7 @@ namespace BIA.BLL.Utility
                 log.req_time = DateTime.Now;
                 log.req_blob = byteArrayConverter.GetGenericJsonData(requestBody);
 
-                var resp = await _genericApiCall.HttpPostEVRequestAsync(requestBody, apiUrl, "CheckEVBalance");
+                using var resp = await _genericApiCall.HttpPostEVRequestAsync(requestBody, apiUrl, "CheckEVBalance");
 
                 if (resp.IsSuccessStatusCode)
                 {

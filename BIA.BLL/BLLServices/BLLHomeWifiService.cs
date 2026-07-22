@@ -940,105 +940,106 @@ namespace BIA.BLL.BLLServices
                             retailer_code = retailerCode
                         });
 
-                DataTable dt =
-                    await _dataManager.GetDEPOrderStatus(retailerCode);
-
-                var data = new List<object>();
-
-                foreach (DataRow row in dt.Rows)
+                using (DataTable dt =
+                    await _dataManager.GetDEPOrderStatus(retailerCode))
                 {
-                    string orderNumber = GetColumnString(row, "ORDER_NUMBER");
-                    string initiatorChannel = GetColumnString(row, "INITIATOR_CHANNEL");
-                    string orderType = GetColumnString(row, "ORDER_TYPE");
-                    string subscriptionType = GetColumnString(row, "SUBSCRIPTION_TYPE");
-                    string simkitType = GetColumnString(row, "SIMKIT_TYPE");
-                    string paymentType = GetColumnString(row, "PAYMENT_TYPE");
+                    var data = new List<object>();
 
-                    object requiredPages = await GetRequiredPages(
-                        orderNumber,
-                        initiatorChannel,
-                        orderType,
-                        subscriptionType,
-                        simkitType,
-                        paymentType
-                    );
-
-                    data.Add(new
+                    foreach (DataRow row in dt.Rows)
                     {
-                        order_number = orderNumber,
-                        mobile = GetColumnString(row, "MOBILE"),
-                        alternate_mobile = GetColumnString(row, "ALTERNATE_MOBILE"),
-                        customer_name = GetColumnString(row, "CUSTOMER_NAME"),
-                        email = GetColumnString(row, "EMAIL"),
+                        string orderNumber = GetColumnString(row, "ORDER_NUMBER");
+                        string initiatorChannel = GetColumnString(row, "INITIATOR_CHANNEL");
+                        string orderType = GetColumnString(row, "ORDER_TYPE");
+                        string subscriptionType = GetColumnString(row, "SUBSCRIPTION_TYPE");
+                        string simkitType = GetColumnString(row, "SIMKIT_TYPE");
+                        string paymentType = GetColumnString(row, "PAYMENT_TYPE");
 
-                        offer_name = GetColumnString(row, "OFFER_NAME"),
-                        offer_code = GetColumnString(row, "OFFER_CODE"),
+                        object requiredPages = await GetRequiredPages(
+                            orderNumber,
+                            initiatorChannel,
+                            orderType,
+                            subscriptionType,
+                            simkitType,
+                            paymentType
+                        );
 
-                        // v1.7: multiple devices are returned as array.
-                        devices = GetDevicesFromStatusRow(row),
+                        data.Add(new
+                        {
+                            order_number = orderNumber,
+                            mobile = GetColumnString(row, "MOBILE"),
+                            alternate_mobile = GetColumnString(row, "ALTERNATE_MOBILE"),
+                            customer_name = GetColumnString(row, "CUSTOMER_NAME"),
+                            email = GetColumnString(row, "EMAIL"),
 
-                        delivery_address = GetColumnString(row, "DELIVERY_ADDRESS"),
-                        district = GetColumnString(row, "DISTRICT"),
-                        area = GetColumnString(row, "AREA"),
+                            offer_name = GetColumnString(row, "OFFER_NAME"),
+                            offer_code = GetColumnString(row, "OFFER_CODE"),
 
-                        payment_type = paymentType,
-                        total_amount = GetColumnString(row, "TOTAL_AMOUNT"),
-                        payment_status = GetColumnString(row, "PAYMENT_STATUS"),
+                            // v1.7: multiple devices are returned as array.
+                            devices = GetDevicesFromStatusRow(row),
 
-                        order_date = GetColumnString(row, "ORDER_DATE"),
-                        order_assigned_at = GetColumnString(row, "ORDER_ASSIGNED_AT"),
-                        appointment_date = GetColumnString(row, "APPOINTMENT_DATE"),
+                            delivery_address = GetColumnString(row, "DELIVERY_ADDRESS"),
+                            district = GetColumnString(row, "DISTRICT"),
+                            area = GetColumnString(row, "AREA"),
 
-                        nw_assess_id = GetColumnString(row, "NW_ASSESS_ID"),
-                        nw_assess_status = GetColumnString(row, "NW_ASSESS_STATUS"),
-                        is_nw_assessed = GetColumnString(row, "IS_NW_ASSESSED"),
+                            payment_type = paymentType,
+                            total_amount = GetColumnString(row, "TOTAL_AMOUNT"),
+                            payment_status = GetColumnString(row, "PAYMENT_STATUS"),
 
-                        order_type = orderType,
-                        order_status = GetColumnString(row, "ORDER_STATUS"),
-                        initiator_channel = initiatorChannel,
-                        subscription_type = subscriptionType,
-                        simkit_type = simkitType,
+                            order_date = GetColumnString(row, "ORDER_DATE"),
+                            order_assigned_at = GetColumnString(row, "ORDER_ASSIGNED_AT"),
+                            appointment_date = GetColumnString(row, "APPOINTMENT_DATE"),
 
-                        ordered_msisdn = GetColumnString(row, "ORDERED_MSISDN"),
+                            nw_assess_id = GetColumnString(row, "NW_ASSESS_ID"),
+                            nw_assess_status = GetColumnString(row, "NW_ASSESS_STATUS"),
+                            is_nw_assessed = GetColumnString(row, "IS_NW_ASSESSED"),
 
-                        retailer_code = GetColumnString(row, "RETAILER_CODE"),
-                        remarks = GetColumnString(row, "REMARKS"),
-                        cancelation_reason = GetColumnString(row, "CANCELATION_REASON"),
+                            order_type = orderType,
+                            order_status = GetColumnString(row, "ORDER_STATUS"),
+                            initiator_channel = initiatorChannel,
+                            subscription_type = subscriptionType,
+                            simkit_type = simkitType,
 
-                        is_activation_done = GetColumnString(row, "IS_ACTIVATION_DONE"),
-                        is_imei_updated = GetColumnString(row, "IS_IMEI_UPDATED"),
-                        is_payslip_uploaded = GetColumnString(row, "IS_PAYSLIP_UPLOADED"),
-                        is_payment_method_changed = GetColumnString(row, "IS_PAYMENT_METHOD_CHANGED"),
-                        is_canceled = GetColumnString(row, "IS_CANCELED"),
+                            ordered_msisdn = GetColumnString(row, "ORDERED_MSISDN"),
 
-                        bi_order_number = GetColumnString(row, "BI_ORDER_NUMBER"),
-                        purpose_number = GetColumnString(row, "PURPOSE_NUMBER"),
-                        bi_status = GetColumnString(row, "BI_STATUS"),
+                            retailer_code = GetColumnString(row, "RETAILER_CODE"),
+                            remarks = GetColumnString(row, "REMARKS"),
+                            cancelation_reason = GetColumnString(row, "CANCELATION_REASON"),
 
-                        status = GetColumnString(row, "STATUS"),
-                        next_action = GetColumnString(row, "NEXT_ACTION"),
-                        next_action_page = GetColumnString(row, "NEXT_ACTION_PAGE"),
-                        next_action_title = GetColumnString(row, "NEXT_ACTION_TITLE"),
-                        next_action_description = GetColumnString(row, "NEXT_ACTION_DESCRIPTION"),
-                        status_name = GetColumnString(row, "STATUS_NAME"),
+                            is_activation_done = GetColumnString(row, "IS_ACTIVATION_DONE"),
+                            is_imei_updated = GetColumnString(row, "IS_IMEI_UPDATED"),
+                            is_payslip_uploaded = GetColumnString(row, "IS_PAYSLIP_UPLOADED"),
+                            is_payment_method_changed = GetColumnString(row, "IS_PAYMENT_METHOD_CHANGED"),
+                            is_canceled = GetColumnString(row, "IS_CANCELED"),
 
-                        is_pending = GetColumnString(row, "IS_PENDING"),
-                        is_ongoing = GetColumnString(row, "IS_ONGOING"),
-                        is_successfull = GetColumnString(row, "IS_SUCCESSFULL"),
-                        is_successfully_done = GetColumnString(row, "IS_SUCCESSFULLY_DONE"),
-                        is_failed = GetColumnString(row, "IS_FAILED"),
-                        is_reffered = GetColumnString(row, "IS_REFFERED"),
+                            bi_order_number = GetColumnString(row, "BI_ORDER_NUMBER"),
+                            purpose_number = GetColumnString(row, "PURPOSE_NUMBER"),
+                            bi_status = GetColumnString(row, "BI_STATUS"),
 
-                        required_pages = requiredPages
-                    });
+                            status = GetColumnString(row, "STATUS"),
+                            next_action = GetColumnString(row, "NEXT_ACTION"),
+                            next_action_page = GetColumnString(row, "NEXT_ACTION_PAGE"),
+                            next_action_title = GetColumnString(row, "NEXT_ACTION_TITLE"),
+                            next_action_description = GetColumnString(row, "NEXT_ACTION_DESCRIPTION"),
+                            status_name = GetColumnString(row, "STATUS_NAME"),
+
+                            is_pending = GetColumnString(row, "IS_PENDING"),
+                            is_ongoing = GetColumnString(row, "IS_ONGOING"),
+                            is_successfull = GetColumnString(row, "IS_SUCCESSFULL"),
+                            is_successfully_done = GetColumnString(row, "IS_SUCCESSFULLY_DONE"),
+                            is_failed = GetColumnString(row, "IS_FAILED"),
+                            is_reffered = GetColumnString(row, "IS_REFFERED"),
+
+                            required_pages = requiredPages
+                        });
+                    }
+
+                    return new HomeWifiCommonResponseModel
+                    {
+                        isError = false,
+                        message = "Order status fetched successfully.",
+                        data = data
+                    };
                 }
-
-                return new HomeWifiCommonResponseModel
-                {
-                    isError = false,
-                    message = "Order status fetched successfully.",
-                    data = data
-                };
             }
             catch (Exception ex)
             {
@@ -3996,34 +3997,35 @@ namespace BIA.BLL.BLLServices
                     return null;
                 }
 
-                DataTable dtFallback =
-                    await _dataManager.GetDPELeadDetailsDbFallbackData(order_number);
-
-                JObject dbFallbackData = new JObject();
-
-                if (dtFallback != null && dtFallback.Rows.Count > 0)
+                using (DataTable dtFallback =
+                    await _dataManager.GetDPELeadDetailsDbFallbackData(order_number))
                 {
-                    DataRow row = dtFallback.Rows[0];
+                    JObject dbFallbackData = new JObject();
 
-                    foreach (DataColumn column in dtFallback.Columns)
+                    if (dtFallback != null && dtFallback.Rows.Count > 0)
                     {
-                        object value = row[column];
+                        DataRow row = dtFallback.Rows[0];
 
-                        if (value == null || value == DBNull.Value)
-                            continue;
+                        foreach (DataColumn column in dtFallback.Columns)
+                        {
+                            object value = row[column];
 
-                        string propertyName = column.ColumnName;
+                            if (value == null || value == DBNull.Value)
+                                continue;
 
-                        dbFallbackData[propertyName] = JToken.FromObject(value);
+                            string propertyName = column.ColumnName;
+
+                            dbFallbackData[propertyName] = JToken.FromObject(value);
+                        }
                     }
+
+                    Log.ForContext("LogTag", "ApiRequest")
+                        .Information(
+                            "GetLeadDetailsDbFallbackData Response: {@Response}",
+                            dbFallbackData);
+
+                    return dbFallbackData;
                 }
-
-                Log.ForContext("LogTag", "ApiRequest")
-                    .Information(
-                        "GetLeadDetailsDbFallbackData Response: {@Response}",
-                        dbFallbackData);
-
-                return dbFallbackData;
             }
             catch (Exception ex)
             {

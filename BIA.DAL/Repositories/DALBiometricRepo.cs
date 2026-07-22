@@ -579,6 +579,7 @@ public class DALBiometricRepo
         #region ===================| Log Area |=======================
         public async Task RAToDBSSLog(VMBIAToDBSSLog model)
         {
+            if (model == null) return;
             try
             {
                 var parameters = new OracleParameter[]
@@ -3053,15 +3054,16 @@ public class DALBiometricRepo
 
         public async Task<int> GetUserAPIVersion(APIVersionRequest model)
         {
+            if (model == null) return 0;
             int apiVersion = 0;
 
-            Log.Information("DAL GetUserAPIVersion Started. Username: {Username}", model?.username);
+            Log.Information("DAL GetUserAPIVersion Started. Username: {Username}", model.username);
 
             try
             {
                 List<OracleParameter> parameters = new List<OracleParameter>
         {
-            new OracleParameter("P_USER_NAME", OracleDbType.Varchar2, ParameterDirection.Input) { Value = model.username },
+            new OracleParameter("P_USER_NAME", OracleDbType.Varchar2, ParameterDirection.Input) { Value = model.username ?? string.Empty },
             new OracleParameter("P_PASSWORD", OracleDbType.Varchar2, ParameterDirection.Input) { Value = "" }
         };
 
@@ -3070,7 +3072,10 @@ public class DALBiometricRepo
                     "PO_APIVERSION",
                     parameters.ToArray());
 
-                apiVersion = Convert.ToInt32(result.ToString());
+                if (result != null && result != DBNull.Value)
+                {
+                    apiVersion = Convert.ToInt32(result);
+                }
             }
             catch (Exception ex)
             {
@@ -6560,24 +6565,25 @@ public class DALBiometricRepo
             }
         };
 
-                DataTable dt =
+                using (DataTable dt =
                     await _oracleDataManagerV2.SelectProcedureV2(
                         "BIODB.GET_DEP_DEVICE_OLD_IDENTIFIER",
                         parameters
-                    );
-
-                Log.ForContext("LogTag", "DBRequest")
-                    .Information(
-                        "GET_DEP_DEVICE_OLD_IDENTIFIER Response Count: {Count}",
-                        dt?.Rows.Count ?? 0);
-
-                if (dt != null && dt.Rows.Count > 0)
+                    ))
                 {
-                    string? oldIdentifier = dt.Rows[0]["OLD_IDENTIFIER"]?.ToString();
+                    Log.ForContext("LogTag", "DBRequest")
+                        .Information(
+                            "GET_DEP_DEVICE_OLD_IDENTIFIER Response Count: {Count}",
+                            dt?.Rows.Count ?? 0);
 
-                    return string.IsNullOrWhiteSpace(oldIdentifier)
-                        ? null
-                        : oldIdentifier.Trim();
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        string? oldIdentifier = dt.Rows[0]["OLD_IDENTIFIER"]?.ToString();
+
+                        return string.IsNullOrWhiteSpace(oldIdentifier)
+                            ? null
+                            : oldIdentifier.Trim();
+                    }
                 }
 
                 return null;
@@ -6821,6 +6827,11 @@ public class DALBiometricRepo
 
         public async Task<HomeWifiCommonResponseModel> UpsertDEPOrder(HomeWifiDEPOrderRequestModel model, string operationType = "GENERAL")
         {
+            if (model == null)
+            {
+                return new HomeWifiCommonResponseModel { isError = true, message = "Request model is null", data = null };
+            }
+
             try
             {
                 string? devicesJson =
@@ -7294,24 +7305,25 @@ public class DALBiometricRepo
             }
         };
 
-                DataTable dt =
+                using (DataTable dt =
                     await _oracleDataManagerV2.SelectProcedureV2(
                         "SP_GET_DPE_ORDER_TYPE",
                         parameters
-                    );
-
-                Log.ForContext("LogTag", "DBRequest")
-                    .Information(
-                        "GET_DPE_ORDER_TYPE_BY_ORDER_NUMBER Response Count: {Count}",
-                        dt?.Rows.Count ?? 0);
-
-                if (dt != null && dt.Rows.Count > 0)
+                    ))
                 {
-                    string? orderType = dt.Rows[0]["ORDER_TYPE"]?.ToString();
+                    Log.ForContext("LogTag", "DBRequest")
+                        .Information(
+                            "GET_DPE_ORDER_TYPE_BY_ORDER_NUMBER Response Count: {Count}",
+                            dt?.Rows.Count ?? 0);
 
-                    return string.IsNullOrWhiteSpace(orderType)
-                        ? null
-                        : orderType.Trim();
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        string? orderType = dt.Rows[0]["ORDER_TYPE"]?.ToString();
+
+                        return string.IsNullOrWhiteSpace(orderType)
+                            ? null
+                            : orderType.Trim();
+                    }
                 }
 
                 return null;
@@ -7387,24 +7399,25 @@ public class DALBiometricRepo
             }
         };
 
-                DataTable dt =
+                using (DataTable dt =
                     await _oracleDataManagerV2.SelectProcedureV2(
                         "SP_GET_IS_PAYMENT_METHOD_CHANGED",
                         parameters
-                    );
-
-                Log.ForContext("LogTag", "DBRequest")
-                    .Information(
-                        "GET_IS_PAYMENT_METHOD_CHANGED_BY_ORDER_NUMBER Response Count: {Count}",
-                        dt?.Rows.Count ?? 0);
-
-                if (dt != null && dt.Rows.Count > 0)
+                    ))
                 {
-                    string? flag = dt.Rows[0]["IS_PAYMENT_METHOD_CHANGED"]?.ToString();
+                    Log.ForContext("LogTag", "DBRequest")
+                        .Information(
+                            "GET_IS_PAYMENT_METHOD_CHANGED_BY_ORDER_NUMBER Response Count: {Count}",
+                            dt?.Rows.Count ?? 0);
 
-                    return string.IsNullOrWhiteSpace(flag)
-                        ? 0
-                        : Convert.ToInt32(flag);
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        string? flag = dt.Rows[0]["IS_PAYMENT_METHOD_CHANGED"]?.ToString();
+
+                        return string.IsNullOrWhiteSpace(flag)
+                            ? 0
+                            : Convert.ToInt32(flag);
+                    }
                 }
 
                 return 0;

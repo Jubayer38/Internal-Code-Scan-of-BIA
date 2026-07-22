@@ -2730,7 +2730,7 @@ namespace BIA.Controllers
                     {
                         if (dbssRespModel.data.Count < 1)
                         {
-                            new Exception("No data found. API url: " + SettingsValues.GetDbssBaseUrl() + apiUrl);
+                            throw new Exception("No data found. API url: " + SettingsValues.GetDbssBaseUrl() + apiUrl);
                         }
                         else
                         {
@@ -3434,14 +3434,7 @@ namespace BIA.Controllers
 
                 var result = await _bllOrder.GetOrderInfoByTokenNoV2(model.token_id);
 
-                if (result.isError == true)
-                {
-                    return Ok(result);
-                }
-                else
-                {
-                    return Ok(result);
-                }
+                return Ok(result);
             }
             catch (UnauthorizedAccessException ex)
             {
@@ -6675,8 +6668,6 @@ namespace BIA.Controllers
                     string secreteKey = string.Empty;
                     string loginProviderId = string.Empty;
                     secreteKey = SettingsValues.GetJWTSequrityKey();
-                    IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).Build();
-
                     ValidTokenResponse security = new ValidTokenResponse();
                     TokenValidationService token = new TokenValidationService(secreteKey);
 

@@ -1,4 +1,4 @@
-﻿using BIA.BLL.BLLServices;
+using BIA.BLL.BLLServices;
 using BIA.BLL.Utility;
 using BIA.Common;
 using BIA.Entity.Collections;
@@ -1907,8 +1907,6 @@ namespace BIA.Controllers
                 try
                 {
                     
-                    IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: true, reloadOnChange: true).Build();
-
                     try
                     {
                         productInfo = await _bllCommon.GetProductValueForSIMSearching(model);
