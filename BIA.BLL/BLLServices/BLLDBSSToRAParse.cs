@@ -489,10 +489,7 @@ namespace BIA.BLL.BLLServices
             {
                 if (dbssResp?["data"]?["status"] == null
                     && dbssResp?["data"]?["logical_inventory_status"] == null
-                    && dbssResp?["data"]?["physical_inventory_status"] == null
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["logical_inventory_status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["physical_inventory_status"]?.ToString()))
+                    && dbssResp?["data"]?["physical_inventory_status"] == null)
                 {
                     response.result = false;
                     response.message = MessageCollection.DataNotFound;
@@ -713,10 +710,7 @@ namespace BIA.BLL.BLLServices
             {
                 if (dbssResp?["data"]?["status"] == null
                     && dbssResp?["data"]?["logical_inventory_status"] == null
-                    && dbssResp?["data"]?["physical_inventory_status"] == null
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["logical_inventory_status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["physical_inventory_status"]?.ToString()))
+                    && dbssResp?["data"]?["physical_inventory_status"] == null)
                 {
                     response.result = false;
                     response.message = MessageCollection.DataNotFound;
@@ -972,10 +966,7 @@ namespace BIA.BLL.BLLServices
             {
                 if (dbssResp?["data"]?["status"] == null
                     && dbssResp?["data"]?["logical_inventory_status"] == null
-                    && dbssResp?["data"]?["physical_inventory_status"] == null
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["logical_inventory_status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["physical_inventory_status"]?.ToString()))
+                    && dbssResp?["data"]?["physical_inventory_status"] == null)
                 {
                     response.result = false;
                     response.message = MessageCollection.DataNotFound;
@@ -1087,10 +1078,7 @@ namespace BIA.BLL.BLLServices
             {
                 if (dbssResp?["data"]?["status"] == null
                     && dbssResp?["data"]?["logical_inventory_status"] == null
-                    && dbssResp?["data"]?["physical_inventory_status"] == null
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["logical_inventory_status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["physical_inventory_status"]?.ToString()))
+                    && dbssResp?["data"]?["physical_inventory_status"] == null)
                 {
                     response.result = false;
                     response.message = MessageCollection.DataNotFound;
@@ -1169,10 +1157,7 @@ namespace BIA.BLL.BLLServices
             {
                 if (dbssResp?["data"]?["status"] == null
                     && dbssResp?["data"]?["logical_inventory_status"] == null
-                    && dbssResp?["data"]?["physical_inventory_status"] == null
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["logical_inventory_status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["physical_inventory_status"]?.ToString()))
+                    && dbssResp?["data"]?["physical_inventory_status"] == null)
                 {
                     response.result = false;
                     response.message = MessageCollection.DataNotFound;
@@ -1250,10 +1235,7 @@ namespace BIA.BLL.BLLServices
             {
                 if (dbssResp?["data"]?["status"] == null
                     && dbssResp?["data"]?["logical_inventory_status"] == null
-                    && dbssResp?["data"]?["physical_inventory_status"] == null
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["logical_inventory_status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["physical_inventory_status"]?.ToString()))
+                    && dbssResp?["data"]?["physical_inventory_status"] == null)
                 {
                     response.result = false;
                     response.message = MessageCollection.DataNotFound;
@@ -1360,10 +1342,7 @@ namespace BIA.BLL.BLLServices
             {
                 if (dbssResp?["data"]?["status"] == null
                     && dbssResp?["data"]?["logical_inventory_status"] == null
-                    && dbssResp?["data"]?["physical_inventory_status"] == null
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["logical_inventory_status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["physical_inventory_status"]?.ToString()))
+                    && dbssResp?["data"]?["physical_inventory_status"] == null)
                 {
                     response.result = false;
                     response.message = MessageCollection.DataNotFound;
@@ -1519,10 +1498,7 @@ namespace BIA.BLL.BLLServices
             {
                 if (dbssResp?["data"]?["status"] == null
                     && dbssResp?["data"]?["logical_inventory_status"] == null
-                    && dbssResp?["data"]?["physical_inventory_status"] == null
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["logical_inventory_status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["physical_inventory_status"]?.ToString()))
+                    && dbssResp?["data"]?["physical_inventory_status"] == null)
                 {
                     response.result = false;
                     response.message = MessageCollection.DataNotFound;
@@ -1580,10 +1556,7 @@ namespace BIA.BLL.BLLServices
             {
                 if (dbssResp?["data"]?["status"] == null
                     && dbssResp?["data"]?["logical_inventory_status"] == null
-                    && dbssResp?["data"]?["physical_inventory_status"] == null
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["logical_inventory_status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["physical_inventory_status"]?.ToString()))
+                    && dbssResp?["data"]?["physical_inventory_status"] == null)
                 {
                     response.result = false;
                     response.message = MessageCollection.DataNotFound;
@@ -4980,10 +4953,7 @@ namespace BIA.BLL.BLLServices
             {
                 if (dbssResp?["data"]?["status"] == null
                     && dbssResp?["data"]?["logical_inventory_status"] == null
-                    && dbssResp?["data"]?["physical_inventory_status"] == null
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["logical_inventory_status"]?.ToString())
-                    && String.IsNullOrEmpty(dbssResp?["data"]?["physical_inventory_status"]?.ToString()))
+                    && dbssResp?["data"]?["physical_inventory_status"] == null)
                 {
                     response.result = false;
                     response.message = MessageCollection.DataNotFound;

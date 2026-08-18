@@ -45,7 +45,13 @@ namespace BIA.BLL.BLLServices
         {
             int result = 0;
 
-            Log.Information("BLL GetUserAPIVersion Started. Username: {Username}", model?.username);
+            if (model == null)
+            {
+                Log.Warning("BLL GetUserAPIVersion called with a null request model.");
+                return result;
+            }
+
+            Log.Information("BLL GetUserAPIVersion Started. Username: {Username}", model.username);
 
             try
             {
@@ -61,11 +67,11 @@ namespace BIA.BLL.BLLServices
                     ex is TaskCanceledException ||
                     ex is TimeoutException)
                 {
-                    Log.Error(ex, "504 or Timeout in BLL GetUserAPIVersion. Username: {Username}", model?.username);
+                    Log.Error(ex, "504 or Timeout in BLL GetUserAPIVersion. Username: {Username}", model.username);
                 }
                 else
                 {
-                    Log.Error(ex, "Exception in BLL GetUserAPIVersion. Username: {Username}", model?.username);
+                    Log.Error(ex, "Exception in BLL GetUserAPIVersion. Username: {Username}", model.username);
                 }
 
                 throw;

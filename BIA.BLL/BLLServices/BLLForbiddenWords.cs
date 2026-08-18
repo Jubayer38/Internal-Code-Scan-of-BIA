@@ -26,7 +26,13 @@ namespace BIA.BLL.BLLServices
             await _semaphore.WaitAsync();
             try
             {
-                if (!_isLoaded)
+                bool alreadyLoaded;
+                lock (_lock)
+                {
+                    alreadyLoaded = _isLoaded;
+                }
+
+                if (!alreadyLoaded)
                 {
                     var dal = new DALForbiddenWords();
                     var wordsFromDb = await dal.GetForbiddenWordsFromDBAsync();

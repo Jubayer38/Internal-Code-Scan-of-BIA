@@ -25,7 +25,7 @@ namespace BIA.Entity.Utility
                 aes.Mode = CipherMode.CBC;
                 aes.Padding = PaddingMode.PKCS7;
 
-                ICryptoTransform enc = aes.CreateEncryptor(aes.Key, aes.IV);
+                using ICryptoTransform enc = aes.CreateEncryptor(aes.Key, aes.IV);
 
                 using (MemoryStream ms = new MemoryStream())
                 {
@@ -59,7 +59,7 @@ namespace BIA.Entity.Utility
                     aes.Mode = CipherMode.CBC;
                     aes.Padding = PaddingMode.PKCS7;
 
-                    ICryptoTransform dec = aes.CreateDecryptor(aes.Key, aes.IV);
+                    using ICryptoTransform dec = aes.CreateDecryptor(aes.Key, aes.IV);
 
                     using (MemoryStream ms = new MemoryStream(cipher))
                     {
@@ -106,7 +106,7 @@ namespace BIA.Entity.Utility
                 aes.Padding = PaddingMode.PKCS7;
 
                 // Create AES Decryptor
-                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+                using ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
                 using (MemoryStream ms = new MemoryStream(cipherBytes))
                 {
@@ -181,7 +181,7 @@ namespace BIA.Entity.Utility
                     aes.Mode = CipherMode.CBC;
                     aes.Padding = PaddingMode.PKCS7;
 
-                    ICryptoTransform dec = aes.CreateDecryptor(aes.Key, aes.IV);
+                    using ICryptoTransform dec = aes.CreateDecryptor(aes.Key, aes.IV);
 
                     using (MemoryStream ms = new MemoryStream(cipher))
                     {
@@ -232,7 +232,7 @@ namespace BIA.Entity.Utility
                 aesAlg.Key = Key;
                 aesAlg.IV = IV;
 
-                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+                using ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
                 using (MemoryStream msEncrypt = new MemoryStream())
                 {
@@ -263,7 +263,7 @@ namespace BIA.Entity.Utility
                 aesAlg.Key = Key;
                 aesAlg.IV = IV;
 
-                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+                using ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
 
                 using (MemoryStream msDecrypt = new MemoryStream(cipherText))
                 using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))

@@ -591,7 +591,7 @@ public class DALBiometricRepo
                     //new OracleParameter("P_USER_ID", OracleDbType.Varchar2, ParameterDirection.Input) { Value = model.username },
                     new OracleParameter("P_USER_ID", OracleDbType.Varchar2, ParameterDirection.Input)
                     {
-                         Value = string.IsNullOrEmpty(model?.username) ? "00000" : model.username
+                         Value = string.IsNullOrEmpty(model.username) ? "00000" : model.username
                     },
                     new OracleParameter("P_REQ_BLOB", OracleDbType.Blob, ParameterDirection.Input) { Value = model.req_blob },
                     new OracleParameter("P_RES_BLOB", OracleDbType.Blob, ParameterDirection.Input) { Value = model.res_blob },
@@ -3084,11 +3084,11 @@ public class DALBiometricRepo
                     ex is TaskCanceledException ||
                     ex is TimeoutException)
                 {
-                    Log.Error(ex, "504 or Timeout in DAL USERAPIVERSION. Username: {Username}", model?.username);
+                    Log.Error(ex, "504 or Timeout in DAL USERAPIVERSION. Username: {Username}", model.username);
                 }
                 else
                 {
-                    Log.Error(ex, "Exception in DAL USERAPIVERSION. Username: {Username}", model?.username);
+                    Log.Error(ex, "Exception in DAL USERAPIVERSION. Username: {Username}", model.username);
                 }
 
                 string? text = Convert.ToString(new

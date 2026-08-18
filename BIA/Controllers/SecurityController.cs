@@ -1836,7 +1836,7 @@ namespace BIA.Controllers
             APIVersionResponseRev apiVersionRespObj = new APIVersionResponseRev();
             int apiVersion = 0;
 
-            Log.Information("GetAPIServerV3 Started. Username: {Username}", model?.username);
+            Log.Information("GetAPIServerV3 Started. Username: {Username}", model.username);
 
             try
             {
@@ -1844,7 +1844,7 @@ namespace BIA.Controllers
 
                 if (apiVersion == 0)
                 {
-                    Log.Warning("User not found for Username: {Username}", model?.username);
+                    Log.Warning("User not found for Username: {Username}", model.username);
 
                     return Ok(new APIVersionResponseWithAppUpdateCheckRev()
                     {
@@ -1872,7 +1872,7 @@ namespace BIA.Controllers
                     apiUpdateData.data.api_version = apiVersion;
                     apiUpdateData.message = apiVersion == 1 ? "Old version." : "New version.";
 
-                    Log.Information("GetAPIServerV3 Completed With App Update Check. Username: {Username}", model?.username);
+                    Log.Information("GetAPIServerV3 Completed With App Update Check. Username: {Username}", model.username);
 
                     return Ok(apiUpdateData);
                 }
@@ -1896,7 +1896,7 @@ namespace BIA.Controllers
                     };
                 }
 
-                Log.Information("GetAPIServerV3 Completed Successfully. Username: {Username}", model?.username);
+                Log.Information("GetAPIServerV3 Completed Successfully. Username: {Username}", model.username);
 
                 return Ok(apiVersionRespObj);
             }
@@ -1909,11 +1909,11 @@ namespace BIA.Controllers
                     ex is TimeoutException ||
                     ex is OperationCanceledException)
                 {
-                    Log.Error(ex, "504 or Timeout detected in GetAPIServerV3 for Username: {Username}", model?.username);
+                    Log.Error(ex, "504 or Timeout detected in GetAPIServerV3 for Username: {Username}", model.username);
                 }
                 else
                 {
-                    Log.Error(ex, "Unhandled Exception in GetAPIServerV3 for Username: {Username}", model?.username);
+                    Log.Error(ex, "Unhandled Exception in GetAPIServerV3 for Username: {Username}", model.username);
                 }
 
                 apiVersionRespObj.isError = true;

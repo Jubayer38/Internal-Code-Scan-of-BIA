@@ -18,7 +18,7 @@ namespace BIA.Middleware
             string requestBody = string.Empty;
             string responseBody = string.Empty;
 
-            HttpResponseMessage response;
+            HttpResponseMessage? response = null;
 
             string platform = PlatformResolver.Resolve(request.RequestUri);
 
@@ -123,6 +123,11 @@ namespace BIA.Middleware
             {
                 stopwatch.Stop();
 
+                // The response never reaches the caller on this path, so release it here
+                // instead of leaking the underlying connection/stream.
+                response?.Dispose();
+                response = null;
+
                 var errorLog = new
                 {
                     LogType = "External",
@@ -151,7 +156,8 @@ namespace BIA.Middleware
                 throw;
             }
 
-            return response;
+            // Reached only when no exception was thrown, so response is set.
+            return response!;
         }
 
         private static string? NormalizeJson(string? text)

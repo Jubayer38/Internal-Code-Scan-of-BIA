@@ -997,7 +997,7 @@ namespace BIA.Controllers
                             {
                                 var exception = "";
                                 
-                                exception = dbssResp?["data"]?[i]?["relationships"]?["barring"]?["data"]?["id"]?.ToString();
+                                exception = dbssResp["data"]?[i]?["relationships"]?["barring"]?["data"]?["id"]?.ToString();
 
                                 if (exception != null)
                                 {

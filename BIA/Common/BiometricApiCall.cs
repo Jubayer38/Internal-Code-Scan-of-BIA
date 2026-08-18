@@ -719,7 +719,7 @@ namespace BIA.Common
                     string cdtResponseStr = cdtResponse?.ToString() ?? "";
                     dbssRespObj = JObject.Parse(cdtResponseStr);
 
-                    desision = dbssRespObj?["data"]?["attributes"]?["credit-decision"]?.ToString();
+                    desision = dbssRespObj["data"]?["attributes"]?["credit-decision"]?.ToString();
 
                     if (!string.IsNullOrEmpty(desision))
                     {
@@ -729,7 +729,7 @@ namespace BIA.Common
                         }
                         else if (desision == "REJECTED")
                         {
-                            res = dbssRespObj?["data"]?["attributes"]?["business-instruction"]?.ToString() ?? "DBSS: CDT Api Response not Valid.";
+                            res = dbssRespObj["data"]?["attributes"]?["business-instruction"]?.ToString() ?? "DBSS: CDT Api Response not Valid.";
                         }
                     }
                     else
@@ -1194,16 +1194,16 @@ namespace BIA.Common
                     log.res_time = DateTime.Now;
                     log.res_blob = byteArrayConverter.GetGenericJsonData(responseContent);
 
-                    if (infoResponse?.is_success == false &&
-                        infoResponse?.message?.Contains("Invalid session token") == true)
+                    if (infoResponse.is_success == false &&
+                        infoResponse.message?.Contains("Invalid session token") == true)
                     {
                         // Invalidate token and retry
                         singleSourceLoginSessionToken = string.Empty;
                         continue;
                     }
 
-                    bool isActive = infoResponse?.Data?.is_active ?? false;
-                    string message = isActive ? messages : infoResponse?.message ?? "";
+                    bool isActive = infoResponse.Data?.is_active ?? false;
+                    string message = isActive ? messages : infoResponse.message ?? "";
 
                     return new SingleSourceCheckResponseModelRevamp
                     {
@@ -1213,8 +1213,8 @@ namespace BIA.Common
                 }
 
                 // Final fallback after retries
-                bool isActiveFinal = infoResponse?.Data?.is_active ?? false;
-                string messageFinal = isActiveFinal ? messages : infoResponse?.message ?? "";
+                bool isActiveFinal = infoResponse.Data?.is_active ?? false;
+                string messageFinal = isActiveFinal ? messages : infoResponse.message ?? "";
 
                 return new SingleSourceCheckResponseModelRevamp
                 {

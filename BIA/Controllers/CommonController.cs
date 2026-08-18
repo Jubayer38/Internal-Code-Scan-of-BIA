@@ -708,7 +708,7 @@ namespace BIA.Controllers
 
                     if (dbssRespModel != null)
                     {
-                        if (dbssRespModel?.included != null && dbssRespModel.included is IEnumerable enumerable)
+                        if (dbssRespModel.included != null && dbssRespModel.included is IEnumerable enumerable)
                         {
                             var result = enumerable.Cast<object>().ToList();
 
@@ -1009,7 +1009,7 @@ namespace BIA.Controllers
 
                     if (dbssRespModel != null)
                     {
-                        if (dbssRespModel?.included != null && dbssRespModel.included is IEnumerable enumerable)
+                        if (dbssRespModel.included != null && dbssRespModel.included is IEnumerable enumerable)
                         {
                             var result = enumerable.Cast<object>().ToList();
 
@@ -1171,7 +1171,7 @@ namespace BIA.Controllers
 
                     if (dbssRespModel != null)
                     {
-                        if (dbssRespModel?.included != null && dbssRespModel.included is IEnumerable enumerable)
+                        if (dbssRespModel.included != null && dbssRespModel.included is IEnumerable enumerable)
                         {
                             var result = enumerable.Cast<object>().ToList();
 

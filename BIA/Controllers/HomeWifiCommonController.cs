@@ -123,9 +123,9 @@ namespace BIA.Controllers
                 if (!response.isError)
                 {
                     response.isError = false;
-                    response.data.offer_name = iccData.offer_name ?? string.Empty;
-                    response.data.product_name = iccData.product_name ?? string.Empty;
-                    response.data.details_message = iccData.offer_description ?? string.Empty;
+                    response.data.offer_name = iccData?.offer_name ?? string.Empty;
+                    response.data.product_name = iccData?.product_name ?? string.Empty;
+                    response.data.details_message = iccData?.offer_description ?? string.Empty;
                 }
                 else
                 {
@@ -1597,7 +1597,7 @@ namespace BIA.Controllers
 
                         if (dbssRespModel != null)
                         {
-                            if (dbssRespModel?.included != null && dbssRespModel.included is IEnumerable enumerable)
+                            if (dbssRespModel.included != null && dbssRespModel.included is IEnumerable enumerable)
                             {
                                 var result = enumerable.Cast<object>().ToList();
 
@@ -1810,6 +1810,13 @@ namespace BIA.Controllers
 
                 var responseObj = await _apiCall.HTTPGetRequestPreloadData(endpoint, model.retailer_id, "GetPreloadedData","FWA");
 
+                // Validate before use; previously this was dereferenced first and only
+                // null-checked afterwards.
+                if (responseObj == null)
+                {
+                    throw new Exception("Preload data response is null.");
+                }
+
                 var plans = responseObj.payload.data.plans;
                 var devices = responseObj.payload.data.devices;
                 var coverage = responseObj.payload.data.coverage;
@@ -1829,20 +1836,17 @@ namespace BIA.Controllers
 
                 log.res_blob = _blJson.GetGenericJsonData(responseObj);
 
-                if (responseObj != null)
+                response = new PreloadDataListResponse
                 {
-                    response = new PreloadDataListResponse
+                    isError = responseObj.status != "SUCCESS",
+                    message = "Preload data fetched successfully.",
+                    data = new AppResponsePreloadData
                     {
-                        isError = responseObj.status != "SUCCESS",
-                        message = "Preload data fetched successfully.",
-                        data = new AppResponsePreloadData
-                        {
-                            devices = deviceResponse,
-                            coverage = coverage,
-                            nationality = nationality
-                        }
-                    };
-                } 
+                        devices = deviceResponse,
+                        coverage = coverage,
+                        nationality = nationality
+                    }
+                };
 
                 return Ok(response);
             }

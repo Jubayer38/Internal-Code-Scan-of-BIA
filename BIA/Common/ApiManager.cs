@@ -383,12 +383,12 @@ namespace BIA.Common
                     iCCDetails.result = false;
                     iCCDetails.message = msg;
                 }
-                else if (response != null && response?.Status != 200)
+                else if (response != null && response.Status != 200)
                 {
                     iCCDetails.result = false;
-                    iCCDetails.message = response?.Message;
+                    iCCDetails.message = response.Message;
                 }
-                else if (response != null && response?.Status == 200 && iccData != null)
+                else if (response != null && response.Status == 200 && iccData != null)
                 {
                     iCCDetails.result = true;
                     iCCDetails.message = iccData.Description;

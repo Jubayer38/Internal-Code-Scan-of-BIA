@@ -41,7 +41,7 @@ public class OracleDataManagerV2
         if (parameters?.Length > 0)
             command.Parameters.AddRange(parameters);
 
-        var outputParameter = new OracleParameter("po_PKValue", OracleDbType.Int32)
+        using var outputParameter = new OracleParameter("po_PKValue", OracleDbType.Int32)
         {
             Direction = ParameterDirection.Output
         };
@@ -85,7 +85,7 @@ public class OracleDataManagerV2
         if (parameters?.Length > 0)
             command.Parameters.AddRange(parameters);
 
-        var outputParameter = new OracleParameter("PO_PKVALUE", OracleDbType.Varchar2, 50)
+        using var outputParameter = new OracleParameter("PO_PKVALUE", OracleDbType.Varchar2, 50)
         {
             Direction = ParameterDirection.Output
         };
@@ -128,7 +128,7 @@ public class OracleDataManagerV2
         if (parameters?.Length > 0)
             command.Parameters.AddRange(parameters);
 
-        var outputParameter = new OracleParameter("po_cursor", OracleDbType.Int32)
+        using var outputParameter = new OracleParameter("po_cursor", OracleDbType.Int32)
         {
             Direction = ParameterDirection.Output
         };
@@ -171,7 +171,7 @@ public class OracleDataManagerV2
         if (parameters?.Length > 0)
             command.Parameters.AddRange(parameters);
 
-        var outputParameter = new OracleParameter("po_return", OracleDbType.Int32)
+        using var outputParameter = new OracleParameter("po_return", OracleDbType.Int32)
         {
             Direction = ParameterDirection.Output
         };
@@ -217,7 +217,7 @@ public class OracleDataManagerV2
         if (parameters?.Length > 0)
             command.Parameters.AddRange(parameters);
 
-        var outputParameter = new OracleParameter("row_affected", OracleDbType.Int32)
+        using var outputParameter = new OracleParameter("row_affected", OracleDbType.Int32)
         {
             Direction = ParameterDirection.Output
         };
@@ -264,7 +264,7 @@ public class OracleDataManagerV2
 
         command.Parameters.AddRange(parameters);
 
-        var outputParameter = new OracleParameter(outputParamName, OracleDbType.Decimal)
+        using var outputParameter = new OracleParameter(outputParamName, OracleDbType.Decimal)
         {
             Direction = ParameterDirection.Output
         };
@@ -325,7 +325,7 @@ public class OracleDataManagerV2
         if (parameters?.Length > 0)
             command.Parameters.AddRange(parameters);
 
-        var outputParameter = new OracleParameter("po_cursor", OracleDbType.RefCursor)
+        using var outputParameter = new OracleParameter("po_cursor", OracleDbType.RefCursor)
         {
             Direction = ParameterDirection.Output
         };
@@ -365,12 +365,12 @@ public class OracleDataManagerV2
         if (parameters?.Length > 0)
             command.Parameters.AddRange(parameters);
 
-        var resultParam = new OracleParameter("PO_RESULT", OracleDbType.Int32)
+        using var resultParam = new OracleParameter("PO_RESULT", OracleDbType.Int32)
         {
             Direction = ParameterDirection.Output
         };
 
-        var messageParam = new OracleParameter("PO_MESSAGE", OracleDbType.Varchar2, 4000)
+        using var messageParam = new OracleParameter("PO_MESSAGE", OracleDbType.Varchar2, 4000)
         {
             Direction = ParameterDirection.Output
         };
