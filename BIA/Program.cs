@@ -63,9 +63,19 @@ else
 // Environment variables should be added last so they can override JSON values
 configBuilder.AddEnvironmentVariables();
 
-// Temporarily build config to retrieve the encrypted connection string
+// Temporarily build config to retrieve the encrypted connection string.
+// IConfigurationRoot is IDisposable (it owns file-watching providers created by
+// reloadOnChange: true), so dispose this short-lived instance once we're done with it.
+string? encryptedConnString;
 var tempConfig = configBuilder.Build();
-var encryptedConnString = tempConfig["ConnectionStrings:DefaultConnectionString"];
+try
+{
+    encryptedConnString = tempConfig["ConnectionStrings:DefaultConnectionString"];
+}
+finally
+{
+    (tempConfig as IDisposable)?.Dispose();
+}
 
 if (!string.IsNullOrWhiteSpace(encryptedConnString))
 {

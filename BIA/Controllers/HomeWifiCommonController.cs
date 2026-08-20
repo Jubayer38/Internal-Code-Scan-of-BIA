@@ -93,7 +93,9 @@ namespace BIA.Controllers
 
                     if (productMapResponse != null && productMapResponse.is_success && productMapResponse.message.ToLower() == "valid")
                     {
-                        response.isError = false;
+                        // ICC/SIM mapping validated successfully; `response` is fully
+                        // rebuilt below from ValidateHomeWifiD2DWithMapping, so no
+                        // further action is needed here.
                     }
                     else
                     {
@@ -118,7 +120,8 @@ namespace BIA.Controllers
                     return Ok(response);
                 }
                 #endregion
-                response = await _bio.ValidateHomeWifiD2DWithMapping(msisdnCheckReqest, "ValidateUnpairedMSISDNV8");
+                response = await _bio.ValidateHomeWifiD2DWithMapping(msisdnCheckReqest, "ValidateUnpairedMSISDNV8")
+                    ?? new RACommonResponseRevampV3 { isError = true, message = "Unknown error" };
 
                 if (!response.isError)
                 {

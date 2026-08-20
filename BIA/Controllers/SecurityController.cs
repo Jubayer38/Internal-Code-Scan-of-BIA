@@ -2558,7 +2558,7 @@ namespace BIA.Controllers
         {
             try
             {
-                return Cryptography.Encrypt(String.Format(StringFormatCollection.AccessTokenFormat, loginProvider, userId, userName, distributorCode, deviceId), true);
+                return Cryptography.Encrypt(String.Format(StringFormatCollection.AccessTokenFormat ?? string.Empty, loginProvider, userId, userName, distributorCode, deviceId), true);
             }
             catch (Exception)
             {
@@ -2570,7 +2570,7 @@ namespace BIA.Controllers
         {
             try
             {
-                return AESCryptography.Encrypt(String.Format(StringFormatCollection.AccessTokenFormatV2, loginProvider, userId, userName, distributorCode, deviceId, Guid.NewGuid()));
+                return AESCryptography.Encrypt(String.Format(StringFormatCollection.AccessTokenFormatV2 ?? string.Empty, loginProvider, userId, userName, distributorCode, deviceId, Guid.NewGuid()));
             }
             catch (Exception)
             {

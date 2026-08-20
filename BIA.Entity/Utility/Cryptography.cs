@@ -39,7 +39,7 @@ namespace BIA.Entity.Utility
             byte[] keyArray;
             byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toEncrypt);
 
-            string key = SettingsValues.GetLegacyCryptoKey();
+            string key = SettingsValues.GetLegacyCryptoKey() ?? string.Empty;
 
             //If hashing use get hashcode regards to your key
             if (useHashing)
@@ -96,7 +96,7 @@ namespace BIA.Entity.Utility
                 throw new Exception("Invalid security token");
             }
 
-            string key = SettingsValues.GetLegacyCryptoKey();
+            string key = SettingsValues.GetLegacyCryptoKey() ?? string.Empty;
 
             if (useHashing)
             {

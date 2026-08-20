@@ -7066,18 +7066,27 @@ public class DALBiometricRepo
             }
         };
 
-                DataTable dt =
-                    await _oracleDataManagerV2.SelectProcedureV2(
-                        "GET_DEP_ORDER_STATUS_BY_RETAILER",
-                        parameters
-                    );
+                DataTable? dt = null;
+                try
+                {
+                    dt =
+                        await _oracleDataManagerV2.SelectProcedureV2(
+                            "GET_DEP_ORDER_STATUS_BY_RETAILER",
+                            parameters
+                        );
 
-                Log.ForContext("LogTag", "DBRequest")
-                    .Information(
-                        "GET_DEP_ORDER_STATUS_BY_RETAILER Response Count: {Count}",
-                        dt?.Rows.Count ?? 0);
+                    Log.ForContext("LogTag", "DBRequest")
+                        .Information(
+                            "GET_DEP_ORDER_STATUS_BY_RETAILER Response Count: {Count}",
+                            dt?.Rows.Count ?? 0);
 
-                return dt;
+                    return dt;
+                }
+                catch
+                {
+                    dt?.Dispose();
+                    throw;
+                }
             }
             catch (Exception ex)
             {
@@ -7114,16 +7123,25 @@ public class DALBiometricRepo
             }
                 };
 
-                DataTable dt = await _oracleDataManagerV2.SelectProcedureV2(
-                    "GET_BI_REQUEST_BY_ORDER",
-                    parameters
-                );
+                DataTable? dt = null;
+                try
+                {
+                    dt = await _oracleDataManagerV2.SelectProcedureV2(
+                        "GET_BI_REQUEST_BY_ORDER",
+                        parameters
+                    );
 
-                Log.ForContext("LogTag", "DBRequest")
-                    .Information("GET_BI_REQUEST_BY_ORDER Response Count: {Count}",
-                        dt?.Rows.Count ?? 0);
+                    Log.ForContext("LogTag", "DBRequest")
+                        .Information("GET_BI_REQUEST_BY_ORDER Response Count: {Count}",
+                            dt?.Rows.Count ?? 0);
 
-                return dt;
+                    return dt;
+                }
+                catch
+                {
+                    dt?.Dispose();
+                    throw;
+                }
             }
             catch (Exception ex)
             {
@@ -7357,18 +7375,27 @@ public class DALBiometricRepo
             }
         };
 
-                DataTable dt =
-                    await _oracleDataManagerV2.SelectProcedureV2(
-                        "GET_DPE_NW_INFO_BY_ORDER_NUMBER",
-                        parameters
-                    );
+                DataTable? dt = null;
+                try
+                {
+                    dt =
+                        await _oracleDataManagerV2.SelectProcedureV2(
+                            "GET_DPE_NW_INFO_BY_ORDER_NUMBER",
+                            parameters
+                        );
 
-                Log.ForContext("LogTag", "DBRequest")
-                    .Information(
-                        "GET_DPE_NW_INFO_BY_ORDER_NUMBER Response Count: {Count}",
-                        dt?.Rows.Count ?? 0);
+                    Log.ForContext("LogTag", "DBRequest")
+                        .Information(
+                            "GET_DPE_NW_INFO_BY_ORDER_NUMBER Response Count: {Count}",
+                            dt?.Rows.Count ?? 0);
 
-                return dt ?? new DataTable();
+                    return dt ?? new DataTable();
+                }
+                catch
+                {
+                    dt?.Dispose();
+                    throw;
+                }
             }
             catch (Exception ex)
             {

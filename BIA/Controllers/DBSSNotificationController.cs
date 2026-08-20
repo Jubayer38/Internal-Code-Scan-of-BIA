@@ -188,7 +188,7 @@ namespace BIA.Controllers
                         else
                         {
                             dBSSNotificationResponse.status = 35;
-                            dBSSNotificationResponse.error_description = iccData.message;
+                            dBSSNotificationResponse.error_description = iccData?.message;
                             await errorUpdate.UpdateStatusandErrorMessage(dBSSNotificationResponse.bi_token_number, dBSSNotificationResponse.status, dBSSNotificationResponse.error_id, dBSSNotificationResponse.error_description);
                             return Ok(response);
                         }

@@ -186,7 +186,7 @@ namespace BIA.BLL.BLLServices
             }
 
             APIVersionResponseWithAppUpdateCheckRev respObj = new APIVersionResponseWithAppUpdateCheckRev();
-            DataTable resultSet = new DataTable();
+            DataTable resultSet;
 
             Log.Information("BLL GetUserAPIVersionWithAppUpdateCheckV2 Started. Username: {Username}", model?.username);
 

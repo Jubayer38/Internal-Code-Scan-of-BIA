@@ -6642,7 +6642,12 @@ namespace BIA.Controllers
                         return response;
                     }
                 }
-                return response;
+                else
+                {
+                    response.result = false;
+                    response.message = MessageCollection.SIMInvalid;
+                    return response;
+                }
             }
             catch (Exception)
             {
@@ -6707,11 +6712,12 @@ namespace BIA.Controllers
                         return response;
                     }
                 }
-
-                // ✅ Fallback path for future safety
-                response.result = false;
-                response.message = MessageCollection.SIMInvalid;
-                return response;
+                else
+                {
+                    response.result = false;
+                    response.message = MessageCollection.SIMInvalid;
+                    return response;
+                }
             }
             catch (Exception)
             {

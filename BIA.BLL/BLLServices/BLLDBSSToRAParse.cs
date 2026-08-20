@@ -529,16 +529,10 @@ namespace BIA.BLL.BLLServices
                         response.message = MessageCollection.NotAPairedSIM;
                         return response;
                     }
-                    else if (dbssResp?["data"]?["physical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.PaymentTypePrepaid.ToLower() /*"prepaid"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAPrepaidSIM;
-                        return response;
-                    }
                     else
                     {
                         response.result = false;
-                        response.message = MessageCollection.SIMInvalid;
+                        response.message = MessageCollection.NotAPrepaidSIM;
                         return response;
                     }
                 }
@@ -559,16 +553,10 @@ namespace BIA.BLL.BLLServices
                         response.message = MessageCollection.NotAPairedSIM;
                         return response;
                     }
-                    else if (dbssResp["data"]?["physical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.PaymentTypePostpaid.ToLower() /*"postpaid"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAPostpaidSIM;
-                        return response;
-                    }
                     else
                     {
                         response.result = false;
-                        response.message = MessageCollection.SIMInvalid;
+                        response.message = MessageCollection.NotAPostpaidSIM;
                         return response;
                     }
                 }
@@ -589,16 +577,10 @@ namespace BIA.BLL.BLLServices
                         response.message = MessageCollection.NotAnUnpairedSIM;
                         return response;
                     }
-                    else if (dbssResp?["data"]?["physical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.PaymentTypePrepaid.ToLower()/*"prepaid"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAPrepaidSIM;
-                        return response;
-                    }
                     else
                     {
                         response.result = false;
-                        response.message = MessageCollection.SIMInvalid;
+                        response.message = MessageCollection.NotAPrepaidSIM;
                         return response;
                     }
                 }
@@ -619,16 +601,10 @@ namespace BIA.BLL.BLLServices
                         response.message = MessageCollection.NotAnUnpairedSIM;
                         return response;
                     }
-                    else if (dbssResp?["data"]?["physical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.PaymentTypePostpaid.ToLower()/*"postpaid"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAPostpaidSIM;
-                        return response;
-                    }
                     else
                     {
                         response.result = false;
-                        response.message = MessageCollection.SIMInvalid;
+                        response.message = MessageCollection.NotAPostpaidSIM;
                         return response;
                     }
                 }
@@ -768,16 +744,10 @@ namespace BIA.BLL.BLLServices
                         response.message = MessageCollection.NotAPairedSIM;
                         return response;
                     }
-                    else if (dbssResp?["data"]?["physical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.PaymentTypePrepaid.ToLower() /*"prepaid"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAPrepaidSIM;
-                        return response;
-                    }
                     else
                     {
                         response.result = false;
-                        response.message = MessageCollection.SIMInvalid;
+                        response.message = MessageCollection.NotAPrepaidSIM;
                         return response;
                     }
                 }
@@ -799,16 +769,10 @@ namespace BIA.BLL.BLLServices
                         response.message = MessageCollection.NotAPairedSIM;
                         return response;
                     }
-                    else if (dbssResp?["data"]?["physical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.PaymentTypePostpaid.ToLower() /*"postpaid"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAPostpaidSIM;
-                        return response;
-                    }
                     else
                     {
                         response.result = false;
-                        response.message = MessageCollection.SIMInvalid;
+                        response.message = MessageCollection.NotAPostpaidSIM;
                         return response;
                     }
                 }
@@ -831,22 +795,10 @@ namespace BIA.BLL.BLLServices
                         response.message = "Please try with correct SIM card";
                         return response;
                     }
-                    else if (dbssResp?["data"]?["logical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.UnairedMSISDN.ToLower() /*"unpaired"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAnUnpairedSIM;
-                        return response;
-                    }
-                    else if (dbssResp?["data"]?["physical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.PaymentTypePrepaid.ToLower()/*"prepaid"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAPrepaidSIM;
-                        return response;
-                    }
                     else
                     {
                         response.result = false;
-                        response.message = MessageCollection.SIMInvalid;
+                        response.message = MessageCollection.NotAnUnpairedSIM;
                         return response;
                     }
                 }
@@ -869,22 +821,10 @@ namespace BIA.BLL.BLLServices
                         response.message = "Please try with correct SIM card";
                         return response;
                     }
-                    else if (dbssResp?["data"]?["logical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.UnairedMSISDN.ToLower()/*"unpaired"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAnUnpairedSIM;
-                        return response;
-                    }
-                    else if (dbssResp?["data"]?["physical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.PaymentTypePostpaid.ToLower()/*"postpaid"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAPostpaidSIM;
-                        return response;
-                    }
                     else
                     {
                         response.result = false;
-                        response.message = MessageCollection.SIMInvalid;
+                        response.message = MessageCollection.NotAnUnpairedSIM;
                         return response;
                     }
                 }
@@ -2166,7 +2106,7 @@ namespace BIA.BLL.BLLServices
                 if (ownerCustomerId == null)
                     throw new Exception("Data not found in owner-customer!");
 
-                string[] dedicatedArr = SettingsValues.Getdedicated_Ac_Id()
+                string[] dedicatedArr = (SettingsValues.Getdedicated_Ac_Id() ?? string.Empty)
                                                        .Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                 int totalData = included.Count();
@@ -4180,7 +4120,7 @@ namespace BIA.BLL.BLLServices
                 }
 
                 // Get dedicated account IDs from config
-                string[] dedicatedArr = SettingsValues.Getdedicated_Ac_Id_TOS()
+                string[] dedicatedArr = (SettingsValues.Getdedicated_Ac_Id_TOS() ?? string.Empty)
                     .Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                 if (dedicatedArr == null || dedicatedArr.Length == 0)
@@ -5018,16 +4958,10 @@ namespace BIA.BLL.BLLServices
                         response.message = MessageCollection.NotAnUnpairedSIM;
                         return response;
                     }
-                    else if (dbssResp?["data"]?["physical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.PaymentTypePostpaid.ToLower()/*"postpaid"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAPostpaidSIM;
-                        return response;
-                    }
                     else
                     {
                         response.result = false;
-                        response.message = MessageCollection.SIMInvalid;
+                        response.message = MessageCollection.NotAPostpaidSIM;
                         return response;
                     }
                 }
@@ -5049,16 +4983,10 @@ namespace BIA.BLL.BLLServices
                         response.message = MessageCollection.NotAPairedSIM;
                         return response;
                     }
-                    else if (dbssResp?["data"]?["physical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.PaymentTypePrepaid.ToLower() /*"prepaid"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAPrepaidSIM;
-                        return response;
-                    }
                     else
                     {
                         response.result = false;
-                        response.message = MessageCollection.SIMInvalid;
+                        response.message = MessageCollection.NotAPrepaidSIM;
                         return response;
                     }
                 }
@@ -5080,16 +5008,10 @@ namespace BIA.BLL.BLLServices
                         response.message = MessageCollection.NotAPairedSIM;
                         return response;
                     }
-                    else if (dbssResp?["data"]?["physical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.PaymentTypePostpaid.ToLower() /*"postpaid"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAPostpaidSIM;
-                        return response;
-                    }
                     else
                     {
                         response.result = false;
-                        response.message = MessageCollection.SIMInvalid;
+                        response.message = MessageCollection.NotAPostpaidSIM;
                         return response;
                     }
                 }
@@ -5111,16 +5033,10 @@ namespace BIA.BLL.BLLServices
                         response.message = MessageCollection.NotAnUnpairedSIM;
                         return response;
                     }
-                    else if (dbssResp?["data"]?["physical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.PaymentTypePrepaid.ToLower()/*"prepaid"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAPrepaidSIM;
-                        return response;
-                    }
                     else
                     {
                         response.result = false;
-                        response.message = MessageCollection.SIMInvalid;
+                        response.message = MessageCollection.NotAPrepaidSIM;
                         return response;
                     }
                 }
@@ -5142,16 +5058,10 @@ namespace BIA.BLL.BLLServices
                         response.message = MessageCollection.NotAnUnpairedSIM;
                         return response;
                     }
-                    else if (dbssResp?["data"]?["physical_inventory_status"]?.ToString().ToLower() != FixedValueCollection.PaymentTypePostpaid.ToLower()/*"postpaid"*/)
-                    {
-                        response.result = false;
-                        response.message = MessageCollection.NotAPostpaidSIM;
-                        return response;
-                    }
                     else
                     {
                         response.result = false;
-                        response.message = MessageCollection.SIMInvalid;
+                        response.message = MessageCollection.NotAPostpaidSIM;
                         return response;
                     }
                 }

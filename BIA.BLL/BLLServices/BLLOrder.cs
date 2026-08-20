@@ -833,7 +833,6 @@ namespace BIA.BLL.BLLServices
                 }
 
                 OrderRequest4 order = new OrderRequest4();
-                BL_Json blJson = new BL_Json();
 
                 order.bi_token_number = model.bi_token_number == null ? 0 : model.bi_token_number;
                 order.purpose_number = String.IsNullOrEmpty(model.purpose_number) ? null : Convert.ToDecimal(model.purpose_number.Trim());
